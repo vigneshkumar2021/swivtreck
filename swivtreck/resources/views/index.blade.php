@@ -9,15 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"
     crossorigin="anonymous"></script>
-
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"
-    crossorigin="anonymous"></script>
-
-
   <script src="https://kit.fontawesome.com/yourkitid.js" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"
-    crossorigin="anonymous"></script>
 
   <style>
     body {
@@ -76,7 +68,7 @@
       padding: 60px 0px;
     }
 
-    .card {
+   .card {
       padding: 0px;
       border-radius: 12px;
       width: 600px;
@@ -188,7 +180,6 @@
       width: 50%;
       padding: 0 30px;
       display: flex;
-      /* background-color: red; */
       margin-left: 80px;
       flex-direction: column;
       justify-content: center;
@@ -284,7 +275,7 @@
       .main-content {
         flex-direction: column;
         padding: 20px;
-
+        position: relative;
       }
 
       .text-box,
@@ -292,11 +283,12 @@
         width: 100%;
         text-align: center;
         padding: 10px;
+
       }
 
       .video-square {
         width: 300px;
-        height: 300px;
+        height: 400px;
       }
     }
 
@@ -304,6 +296,7 @@
       .content {
         flex-direction: column;
         align-items: center;
+
       }
 
       .about-container {
@@ -314,7 +307,7 @@
       .card {
         width: 90%;
       }
-
+     
     }
   </style>
 
@@ -324,10 +317,26 @@
 
   <div class="navbar">
     <div class="title">Swivtrek</div>
+
     <div class="buttons">
-      <a href="/login"><button> LOGIN</button></a>
-      <a href="/register"> <button>SIGN UP</button></a>
+      @guest
+      {{-- Show only for visitors who are not logged in --}}
+      <a href="{{ route('login') }}"><button>LOGIN</button></a>
+      <a href="{{ route('register') }}"><button>SIGN UP</button></a>
+    @endguest
+
+      @auth
+      {{-- Show logged-in user's name --}}
+      <span>Welcome, {{ Auth::user()->name }}!</span>
+
+      <form method="POST" action="{{ route('logout') }}" style="display:inline;">
+      @csrf
+      <button type="submit">LOGOUT</button>
+      </form>
+    @endauth
     </div>
+
+
   </div>
   <br><br>
   <div class="main-content">
@@ -377,15 +386,10 @@
     </div>
   </div>
 
-
-  <style>
-
-  </style>
-
   <script src="https://www.youtube.com/iframe_api"></script>
   <script>
     const videoIds = [
-      "E0aporowHtU", "XaN8AJDEYL8", "ahd6oArQwjo",
+      "E0aporowHtU", "XaN8AJDEYL8", "3mCk_Ot48Uc",
       "nAWpkBnWv7Y", "ahd6oArQwjo"
     ];
 
@@ -414,14 +418,14 @@
     <div class="card">
       <div class="video-wrapper">
         <img
-          src="https://res.cloudinary.com/people-matters/image/upload/fl_immutable_cache,w_624,h_351,q_auto,f_auto/v1510654429/1510654428.jpg">
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSS4E-1dGYNE7u3A_2mPeMDS52kwv9_n8U1jw&s">
       </div>
       <h3 style="color: #7e3d9c;font-weight: bolder; ">VIDEO COURSES</h3>
       <a href="/videocatagories"><button class="explore">EXPLORE</button></a>
     </div>
 
     <div class="card">
-      <img src="/assets/course image/ai.png" alt="Live Courses">
+      <img src="https://itechindia.co/wp-content/uploads/2021/11/student-attendance-tracker.jpeg" alt="Live Courses">
       <h3 style="color: #7e3d9c;font-weight: bolder; ">LIVE COURSES</h3>
       <a href="/livecatagories"><button class="explore">EXPLORE</button></a>
     </div>

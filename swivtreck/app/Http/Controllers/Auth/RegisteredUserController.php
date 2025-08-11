@@ -60,6 +60,6 @@ class RegisteredUserController extends Controller
         Auth::login($user);
 
         // Redirect to your custom page instead of dashboard
-        return redirect()->route('/');
+        return redirect('/');
     }
 }
